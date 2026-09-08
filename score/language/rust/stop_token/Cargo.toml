@@ -10,16 +10,24 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 # *******************************************************************************
-repos:
-  - repo: local
-    hooks:
-      - id: copyright-fix
-        name: //:copyright.fix
-        entry: bazel run //:copyright.fix
-        language: system
-        pass_filenames: false
-      - id: format-fix
-        name: //:format.fix
-        entry: bazel run //:format.fix
-        language: system
-        pass_filenames: false
+
+[package]
+name = "stop_token"
+description = "Rust bindings for score::cpp::stop_token and score::cpp::stop_source."
+version.workspace = true
+authors.workspace = true
+readme.workspace = true
+edition.workspace = true
+license-file.workspace = true
+
+[lib]
+path = "src/lib.rs"
+
+[dependencies]
+cxx = "1.0.186"
+
+[build-dependencies]
+cxx-build = "1.0.186"
+
+[lints]
+workspace = true
