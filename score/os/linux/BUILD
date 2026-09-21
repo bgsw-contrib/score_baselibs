@@ -66,9 +66,8 @@ cc_library(
     ],
     target_compatible_with = ["@platforms//os:linux"],
     visibility = [
-        "//platform/aas/ara/tsync:__subpackages__",
-        "//platform/aas/pas/crash_handler:__pkg__",
-        "//platform/aas/pas/sysmon:__subpackages__",
+        # Coverage scope root (//tools/coverage, eclipse-score/baselibs#512).
+        "//tools/coverage:__pkg__",
         "@score_baselibs//score/os:__subpackages__",
     ],
     deps = [
