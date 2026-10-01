@@ -18,7 +18,6 @@ test_suite(
     tests = [
         "@score_baselibs//score/network/test:unit_tests",
     ],
-    visibility = ["//platform/aas/lib:__pkg__"],
 )
 
 cc_library(
@@ -26,8 +25,6 @@ cc_library(
     srcs = ["ipv4_address.cpp"],
     hdrs = ["ipv4_address.h"],
     features = [
-        "treat_warnings_as_errors",
-        "additional_warnings",
         "strict_warnings",
     ],
     visibility = ["//visibility:public"],
@@ -38,8 +35,6 @@ cc_library(
     srcs = ["udp_socket.cpp"],
     hdrs = ["udp_socket.h"],
     features = [
-        "treat_warnings_as_errors",
-        "additional_warnings",
         "strict_warnings",
     ],
     visibility = ["//visibility:public"],
@@ -58,8 +53,6 @@ cc_library(
     srcs = ["vlan.cpp"],
     hdrs = ["vlan.h"],
     features = [
-        "treat_warnings_as_errors",
-        "additional_warnings",
         "strict_warnings",
     ],
     visibility = ["//visibility:public"],

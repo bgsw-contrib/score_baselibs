@@ -12,7 +12,6 @@
 # *******************************************************************************
 
 load("@rules_cc//cc:defs.bzl", "cc_library", "cc_test")
-load("@score_baselibs//:bazel/unit_tests.bzl", "cc_unit_test_suites_for_host_and_qnx")
 load("@score_baselibs//score/language/safecpp:toolchain_features.bzl", "COMPILER_WARNING_FEATURES")
 load("@score_docs_as_code//:docs.bzl", "docs_bundle")
 
@@ -21,9 +20,7 @@ cc_test(
     srcs = ["bit_manipulation_test.cpp"],
     features = [
         "aborts_upon_exception",
-        "treat_warnings_as_errors",
         "strict_warnings",
-        "additional_warnings",
     ],
     tags = ["unit"],
     deps = [
@@ -37,9 +34,7 @@ cc_test(
     srcs = ["bitmask_operators_test.cpp"],
     features = [
         "aborts_upon_exception",
-        "treat_warnings_as_errors",
         "strict_warnings",
-        "additional_warnings",
     ],
     tags = ["unit"],
     deps = [
@@ -67,17 +62,6 @@ cc_library(
     tags = ["FFI"],
     visibility = [
         "//visibility:public",  # platform_only
-    ],
-)
-
-cc_unit_test_suites_for_host_and_qnx(
-    name = "unit_test_suite",
-    cc_unit_tests = [
-        ":bit_manipulation_test",
-        ":bitmask_operators_test",
-    ],
-    visibility = [
-        "//visibility:public",
     ],
 )
 

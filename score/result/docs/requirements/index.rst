@@ -92,6 +92,18 @@ Functional Requirements
 
    The Result library shall provide conversion utilities to transform Result objects into std::optional<T> types. The conversion shall require explicit handling of error cases before discarding error information, ensuring that errors cannot be silently ignored.
 
+.. comp_req:: Future C++ Library Integration
+   :id: comp_req__result__futurecpp_integration
+   :reqtype: Functional
+   :security: YES
+   :safety: ASIL_B
+   :derived_from: feat_req__baselibs__result_library[version==2]
+   :status: valid
+   :version: 1
+   :satisfied_by: comp__baselibs_result[version==1]
+
+   The Result library shall provide conversion utilities to transform Result objects into score::cpp::expected objects with the same value and error types and vice versa, and to transform a Result object's value into a score::cpp::optional<T>. The conversion to score::cpp::optional<T> shall require explicit handling of error cases before discarding error information, ensuring that errors cannot be silently ignored.
+
 Non-Functional Requirements
 ===========================
 
@@ -180,8 +192,8 @@ Assumptions of Use (AoU)
    The user shall ensure that error domain objects and referenced resources remain valid throughout the entire lifetime of any dependent Result or Error objects.
 
 
-.. needextend:: "__result__" in id
+.. needextend:: c.this_doc() and (type == "comp_req" or type == "aou_req")
    :+tags: baselibs
 
-.. needextend:: "__result__" in id
+.. needextend:: c.this_doc() and (type == "comp_req" or type == "aou_req")
    :+tags: result_lib

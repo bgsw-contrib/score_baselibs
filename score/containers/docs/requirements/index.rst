@@ -35,7 +35,7 @@ Functional Requirements
    :derived_from: feat_req__baselibs__containers_library[version==2]
    :status: valid
    :version: 1
-   :satisfied_by: comp__baselibs_containers[version==1]
+   :satisfied_by: comp__baselibs_containers[version==2]
 
    The Containers library shall provide a fixed-size array container with construction-time size specification.
 
@@ -47,21 +47,9 @@ Functional Requirements
    :derived_from: feat_req__baselibs__containers_library[version==2]
    :status: valid
    :version: 1
-   :satisfied_by: comp__baselibs_containers[version==1]
+   :satisfied_by: comp__baselibs_containers[version==2]
 
    The Containers library shall provide an intrusive doubly-linked list based on the C++ standardization proposal P0406R1.
-
-.. comp_req:: Type Safety
-   :id: comp_req__containers__type_safety
-   :reqtype: Functional
-   :security: YES
-   :safety: ASIL_B
-   :derived_from: feat_req__baselibs__containers_library[version==2]
-   :status: valid
-   :version: 1
-   :satisfied_by: comp__baselibs_containers[version==1]
-
-   The Containers library shall enforce compile-time type safety for all container operations.
 
 .. comp_req:: Non-Relocatable Vector
    :id: comp_req__containers__non_relocatable_vector
@@ -71,7 +59,7 @@ Functional Requirements
    :derived_from: feat_req__baselibs__containers_library[version==2]
    :status: valid
    :version: 1
-   :satisfied_by: comp__baselibs_containers[version==1]
+   :satisfied_by: comp__baselibs_containers[version==2]
 
    The Containers library shall provide a non-relocatable vector container that maintains stable element addresses.
 
@@ -87,7 +75,7 @@ Non-Functional Requirements
    :derived_from: feat_req__baselibs__containers_library[version==2]
    :status: valid
    :version: 1
-   :satisfied_by: comp__baselibs_containers[version==1]
+   :satisfied_by: comp__baselibs_containers[version==2]
 
    The Containers library shall provide deterministic behavior with no dynamic memory allocation.
 
@@ -174,8 +162,8 @@ Assumptions of Use (AoU)
 
    The user shall ensure that element types are copy constructible, move constructible and destructible, and additionally for intrusive containers that they provide the required intrusive node members.
 
-.. needextend:: "__containers__" in id
+.. needextend:: c.this_doc() and (type == "comp_req" or type == "aou_req")
    :+tags: baselibs
 
-.. needextend:: "__containers__" in id
+.. needextend:: c.this_doc() and (type == "comp_req" or type == "aou_req")
    :+tags: containers

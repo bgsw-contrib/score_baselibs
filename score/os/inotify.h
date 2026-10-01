@@ -19,9 +19,6 @@
 
 #include "score/expected.hpp"
 
-/* KW_SUPPRESS_START:AUTOSAR.BUILTIN_NUMERIC:Char is used in respect to the wrapped function's signature */
-/* KW_SUPPRESS_START:MISRA.VAR.HIDDEN:Wrapper function is identifiable through namespace usage */
-
 namespace score
 {
 namespace os
@@ -48,7 +45,7 @@ class Inotify : public ObjectSeam<Inotify>
     virtual score::cpp::expected<std::int32_t, Error> inotify_rm_watch(const std::int32_t fd,
                                                                        const std::int32_t wd) const noexcept = 0;
 
-    virtual ~Inotify() = default;
+    ~Inotify() override = default;
     // Below special member functions declared to avoid autosar_cpp14_a12_0_1_violation
     Inotify(const Inotify&) = delete;
     Inotify& operator=(const Inotify&) = delete;
@@ -69,8 +66,5 @@ struct enable_bitmask_operators<::score::os::Inotify::EventMask> : public std::t
 {
 };
 }  // namespace score
-
-/* KW_SUPPRESS_END:AUTOSAR.BUILTIN_NUMERIC:Char is used in respect to the wrapped function's signature */
-/* KW_SUPPRESS_END:MISRA.VAR.HIDDEN:Wrapper function is identifiable through namespace usage */
 
 #endif  // SCORE_LIB_OS_INOTIFY_H

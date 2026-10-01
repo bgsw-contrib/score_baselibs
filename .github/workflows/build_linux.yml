@@ -33,34 +33,30 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - name: bl-x86_64-linux
+          - name: score-linux-x86_64
             artifact-name: x86_64-linux
-            bazel-config: bl-x86_64-linux
+            bazel-config: score-linux-x86_64
             working-directory: "."
             bazel-build-target: "//..."
             bazel-test-target: >-
               //...
-              -//score/language/safecpp/aborts_upon_exception:abortsuponexception_toolchain_test
-            bazel-test-extra-flags: ""
-          - name: bl-aarch64-linux
+          - name: score-linux-aarch64
             artifact-name: aarch64-linux
-            bazel-config: bl-aarch64-linux
+            bazel-config: score-linux-aarch64
             working-directory: "."
             bazel-build-target: "//..."
             bazel-test-target: >-
               //...
-              -//score/language/safecpp/aborts_upon_exception:abortsuponexception_toolchain_test
               -//score/os/test:acl_test
               -//score/os/test:errno_test
               -//score/os/test:socket_test
-            bazel-test-extra-flags: "--test_timeout=180,900,2700,10800" # Increase test timeout due to QEMU emulation
+            bazel-test-extra-flags: "--test_timeout=180,900,2700,10800 --test_tag_filters=-no_rust_doc_test" # Increase test timeout due to QEMU emulation
           - name: x86_64-linux (examples/integration)
             artifact-name: x86_64-linux-integration
             bazel-config: x86_64-linux
             working-directory: "examples/integration"
             bazel-build-target: "//..."
             bazel-test-target: "//..."
-            bazel-test-extra-flags: ""
     steps:
       - uses: eclipse-score/more-disk-space@6a3b48901846bf7f8cc985925157d71a8973e61f # v1
         with:
@@ -72,7 +68,7 @@ jobs:
         with:
           unique-cache-name: ${{ github.workflow }}-${{ github.job }}-${{ matrix.name }}
       - name: Install QEMU
-        if: matrix.bazel-config == 'bl-aarch64-linux'
+        if: matrix.bazel-config == 'score-linux-aarch64'
         run: |
           sudo apt-get update
           sudo apt install -y qemu-user

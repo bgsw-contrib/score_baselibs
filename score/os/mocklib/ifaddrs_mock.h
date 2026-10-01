@@ -19,8 +19,6 @@
 
 #include <gmock/gmock.h>
 
-/* KW_SUPPRESS_START:MISRA.VAR.HIDDEN:Wrapper function is identifiable through namespace usage */
-
 namespace score
 {
 namespace os
@@ -31,7 +29,7 @@ class IfaddrsMock : public Ifaddrs
   public:
     IfaddrsMock();
 
-    ~IfaddrsMock();
+    ~IfaddrsMock() override;
 
     MOCK_METHOD((score::cpp::expected<ifaddrs*, Error>), getifaddrs, (), (const, noexcept, override));
 
@@ -52,7 +50,5 @@ class IfaddrsMock : public Ifaddrs
 }  // namespace os
 
 }  // namespace score
-
-/* KW_SUPPRESS_END:MISRA.VAR.HIDDEN:Wrapper function is identifiable through namespace usage */
 
 #endif  // SCORE_LIB_OS_MOCKLIB_IFADDRS_MOCK_H

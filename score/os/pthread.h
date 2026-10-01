@@ -29,9 +29,6 @@ namespace score
 namespace os
 {
 
-/* KW_SUPPRESS_START:MISRA.VAR.HIDDEN:Shaddowing function name is intended. */
-/* KW_SUPPRESS_START:AUTOSAR.BUILTIN_NUMERIC:Use char to keep function signature. */
-
 class Pthread : public ObjectSeam<Pthread>
 {
   public:
@@ -47,7 +44,7 @@ class Pthread : public ObjectSeam<Pthread>
 
     static score::cpp::pmr::unique_ptr<Pthread> Default(score::cpp::pmr::memory_resource* memory_resource) noexcept;
 
-    virtual ~Pthread() = default;
+    ~Pthread() override = default;
     // Below special member functions declared to avoid autosar_cpp14_a12_0_1_violation
     Pthread(const Pthread&) = delete;
     Pthread& operator=(const Pthread&) = delete;

@@ -17,8 +17,8 @@
  *
  *********************************************************************************************************************/
 
-#ifndef SCORE_LIB_JSON_INTERNAL_PARSER_VAJSON_JSON_UTIL_NUMBER_H_
-#define SCORE_LIB_JSON_INTERNAL_PARSER_VAJSON_JSON_UTIL_NUMBER_H_
+#ifndef SCORE_LIB_JSON_INTERNAL_PARSER_VAJSON_JSON_UTIL_NUMBER_H
+#define SCORE_LIB_JSON_INTERNAL_PARSER_VAJSON_JSON_UTIL_NUMBER_H
 
 /**********************************************************************************************************************
  *  INCLUDES
@@ -449,7 +449,12 @@ class JsonNumber final
     {
         Optional<TargetType> opt{};
 
-        if ((std::numeric_limits<TargetType>::max() >= number) && (std::numeric_limits<TargetType>::lowest() <= number))
+        // The comparison converts to the common type anyway; be explicit to avoid -Wdouble-promotion.
+        using CommonType = std::common_type_t<TargetType, SourceType>;
+        const CommonType value{static_cast<CommonType>(number)};
+
+        if ((static_cast<CommonType>(std::numeric_limits<TargetType>::max()) >= value) &&
+            (static_cast<CommonType>(std::numeric_limits<TargetType>::lowest()) <= value))
         {
             static_cast<void>(opt.emplace(TargetType(number)));
         }
@@ -578,4 +583,4 @@ class JsonNumber final
 }  // namespace json
 }  // namespace score
 
-#endif  // SCORE_LIB_JSON_INTERNAL_PARSER_VAJSON_JSON_UTIL_NUMBER_H_
+#endif  // SCORE_LIB_JSON_INTERNAL_PARSER_VAJSON_JSON_UTIL_NUMBER_H

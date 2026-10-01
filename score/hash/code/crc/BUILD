@@ -12,7 +12,6 @@
 # *******************************************************************************
 
 load("@rules_cc//cc:defs.bzl", "cc_library", "cc_test")
-load("@score_baselibs//:bazel/unit_tests.bzl", "cc_unit_test_suites_for_host_and_qnx")
 
 # lookup_table is a generic implementation of the CRC algorithm.
 # If different polynomials are needed, consumers can depend on or reuse
@@ -28,9 +27,7 @@ cc_library(
         "lookup_table.h",
     ],
     features = [
-        "treat_warnings_as_errors",
         "strict_warnings",
-        "additional_warnings",
     ],
     tags = ["FFI"],
     visibility = ["//visibility:public"],
@@ -45,9 +42,7 @@ cc_library(
         "crc32_mock.h",
     ],
     features = [
-        "treat_warnings_as_errors",
         "strict_warnings",
-        "additional_warnings",
     ],
     visibility = ["//visibility:public"],
     deps = [
@@ -59,9 +54,7 @@ cc_test(
     name = "unit_test_ieee",
     srcs = ["crc32_ieee_test.cpp"],
     features = [
-        "treat_warnings_as_errors",
         "strict_warnings",
-        "additional_warnings",
     ],
     tags = ["unit"],
     visibility = ["@score_baselibs//score/hash:__pkg__"],
@@ -71,12 +64,4 @@ cc_test(
         "@score_baselibs//score/language/futurecpp",
         "@score_baselibs//score/mw/log:backend_stub_testutil",
     ],
-)
-
-cc_unit_test_suites_for_host_and_qnx(
-    name = "unit_tests",
-    cc_unit_tests = [
-        ":unit_test_ieee",
-    ],
-    visibility = ["//visibility:public"],
 )

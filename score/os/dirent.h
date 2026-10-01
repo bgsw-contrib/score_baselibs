@@ -22,9 +22,6 @@
 #include <sys/types.h>
 #include <cstdint>
 
-/* KW_SUPPRESS_START:AUTOSAR.BUILTIN_NUMERIC:Char is used in respect to the wrapped function's signature */
-/* KW_SUPPRESS_START:MISRA.PTR.TO_PTR_TO_PTR:Used parameters match the param requirements of wrapped function */
-/* KW_SUPPRESS_START:MISRA.VAR.HIDDEN:Wrapper function is identifiable through namespace usage */
 namespace score
 {
 namespace os
@@ -47,7 +44,7 @@ class Dirent : public ObjectSeam<Dirent>
         std::int32_t (*const compar)(const struct dirent**, const struct dirent**)) const noexcept = 0;
     virtual score::cpp::expected_blank<score::os::Error> closedir(DIR* const dirp) const noexcept = 0;
 
-    virtual ~Dirent() = default;
+    ~Dirent() override = default;
     // Below special member functions declared to avoid autosar_cpp14_a12_0_1_violation
     Dirent(const Dirent&) = delete;
     Dirent& operator=(const Dirent&) = delete;
@@ -58,9 +55,6 @@ class Dirent : public ObjectSeam<Dirent>
     Dirent() = default;
 };
 
-/* KW_SUPPRESS_END:MISRA.VAR.HIDDEN:Wrapper function is identifiable through namespace usage */
-/* KW_SUPPRESS_END:MISRA.PTR.TO_PTR_TO_PTR:Used parameters match the param requirements of wrapped function */
-/* KW_SUPPRESS_END:AUTOSAR.BUILTIN_NUMERIC:Char is used in respect to the wrapped function's signature */
 }  // namespace os
 }  // namespace score
 

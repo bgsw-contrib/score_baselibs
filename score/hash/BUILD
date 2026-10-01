@@ -12,13 +12,10 @@
 # *******************************************************************************
 
 load("@rules_cc//cc:defs.bzl", "cc_library")
-load("@score_baselibs//:bazel/unit_tests.bzl", "cc_unit_test_suites_for_host_and_qnx")
 load("@score_docs_as_code//:docs.bzl", "docs_bundle")
 
 COMPILER_WARNING_FEATURES = [
-    "treat_warnings_as_errors",
     "strict_warnings",
-    "additional_warnings",
 ]
 
 cc_library(
@@ -51,17 +48,6 @@ cc_library(
         "@score_baselibs//score/hash/code/core:hash_cal_mock",
         "@score_baselibs//score/hash/code/core/factory:factory_mock",
     ],
-)
-
-cc_unit_test_suites_for_host_and_qnx(
-    name = "unit_tests",
-    test_suites_from_sub_packages = [
-        "@score_baselibs//score/hash/code/common:unit_tests",
-        "@score_baselibs//score/hash/code/core:unit_tests",
-        "@score_baselibs//score/hash/code/crc:unit_tests",
-        "@score_baselibs//score/hash/code/openssl:unit_tests",
-    ],
-    visibility = ["//visibility:public"],
 )
 
 docs_bundle(

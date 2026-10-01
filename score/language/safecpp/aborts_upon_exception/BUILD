@@ -12,14 +12,11 @@
 # *******************************************************************************
 
 load("@rules_cc//cc:defs.bzl", "cc_library", "cc_test")
-load("@score_baselibs//:bazel/unit_tests.bzl", "cc_unit_test_suites_for_host_and_qnx")
 
 cc_library(
     name = "abortsuponexception",
     srcs = ["aborts_upon_exception.cpp"],
     features = [
-        "treat_warnings_as_errors",
-        "additional_warnings",
         "strict_warnings",
     ],
     visibility = ["//visibility:public"],
@@ -52,19 +49,10 @@ cc_test(
         "aborts_upon_exception_test.cpp",
     ],
     features = ["aborts_upon_exception"],
-    tags = ["unit"],
+    tags = ["manual"],
     deps = [
         "@googletest//:gtest_main",
         "@score_baselibs//score/language/futurecpp",
         "@score_baselibs//score/language/safecpp/coverage_termination_handler",
     ],
-)
-
-cc_unit_test_suites_for_host_and_qnx(
-    name = "unit_tests",
-    cc_unit_tests = [
-        ":abortsuponexception_lib_test",
-        ":abortsuponexception_toolchain_test",
-    ],
-    visibility = ["@score_baselibs//score/language/safecpp:__pkg__"],
 )

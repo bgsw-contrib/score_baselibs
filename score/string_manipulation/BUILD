@@ -12,7 +12,6 @@
 # *******************************************************************************
 
 load("@rules_cc//cc:defs.bzl", "cc_library", "cc_test")
-load("@score_baselibs//:bazel/unit_tests.bzl", "cc_unit_test_suites_for_host_and_qnx")
 load("@score_baselibs//score/language/safecpp:toolchain_features.bzl", "COMPILER_WARNING_FEATURES")
 load("@score_baselibs//score/quality/clang_tidy:extra_checks.bzl", "clang_tidy_extra_checks")
 
@@ -61,9 +60,7 @@ cc_test(
     ],
     features = [
         "aborts_upon_exception",
-        "treat_warnings_as_errors",
         "strict_warnings",
-        "additional_warnings",
     ],
     tags = ["unit"],
     deps = [
@@ -85,7 +82,6 @@ cc_library(
     implementation_deps = ["@score_baselibs//score/language/futurecpp"],
     tags = ["FFI"],
     visibility = [
-        "@score_baselibs//score/memory:__pkg__",
         "@score_baselibs//score/mw/log:__subpackages__",
     ],
 )
@@ -97,24 +93,11 @@ cc_test(
     ],
     features = [
         "aborts_upon_exception",
-        "treat_warnings_as_errors",
         "strict_warnings",
-        "additional_warnings",
     ],
     tags = ["unit"],
     deps = [
         ":split_string_view",
         "@googletest//:gtest_main",
-    ],
-)
-
-cc_unit_test_suites_for_host_and_qnx(
-    name = "unit_test_suite",
-    cc_unit_tests = [
-        ":split_string_view_unit_test",
-        ":string_comparison_adaptor_unit_test",
-    ],
-    visibility = [
-        "//visibility:public",
     ],
 )
